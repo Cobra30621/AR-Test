@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,16 @@ public class ArtDisplay : MonoBehaviour
 
     public VideoPlayer SunVideoPlayer;
 
+    private void Awake()
+    {
+        SunVideoPlayer.Prepare();
+        
+    }
+
+
     public void ShowSun()
     {
         SunVideoPlayer.gameObject.SetActive(true);
-        SunVideoPlayer.Stop();
         StartCoroutine(SunCoroutine());
     }
     
@@ -42,13 +49,15 @@ public class ArtDisplay : MonoBehaviour
 
     public void ShowBlueTear(bool show)
     {
-        blueTear.SetActive(show);
+        
         StartCoroutine(BlueTearCoroutine());
     }
     
     private IEnumerator BlueTearCoroutine()
     {
-        yield return new WaitForSeconds(1f);
+        blueTear.SetActive(true);
+        
+        yield return new WaitForSeconds(5f);
         blueTear.SetActive(false);
     }
 }
